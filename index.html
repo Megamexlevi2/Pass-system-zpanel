@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wait 35 Seconds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        #btn-copy {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #btn-copy:active {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>You need to wait 35 seconds...</h1>
+        <p>After this time, you will be able to copy the password.</p>
+        <div id="timer"></div>
+        <button id="btn-copy" onclick="copyPassword()">Copy Password</button>
+    </div>
+
+    <script>
+        var timeLeft = 35;
+        var timerElement = document.getElementById('timer');
+        var copyButton = document.getElementById('btn-copy');
+        var password = "";
+
+        // Fetch a random password from PHP
+        fetch('getPassword.php')
+            .then(response => response.text())
+            .then(data => {
+                password = data;
+            })
+            .catch(error => console.error('Error:', error));
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timerElement.textContent = "Only " + timeLeft + " seconds left...";
+                timeLeft--;
+            } else {
+                timerElement.textContent = "Now you can copy the password!";
+                copyButton.style.display = "inline-block";
+            }
+        }
+
+        function copyPassword() {
+            var tempInput = document.createElement("input");
+            document.body.appendChild(tempInput);
+            tempInput.value = password;
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Password copied: " + password);
+        }
+
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
