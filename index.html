@@ -6,35 +6,72 @@
     <title>Wait 35 Seconds</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #1f1c2c, #928DAB);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            color: #fff;
         }
         .container {
             text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        #timer {
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: blink 1s linear infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
         #btn-copy {
             display: none;
             margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #FF4E50, #FF6B6B);
             color: white;
-            border: none;
+            border: 2px solid #FF4E50;
+            border-radius: 50px;
             cursor: pointer;
-            border-radius: 5px;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(255, 78, 80, 0.5);
+            transition: all 0.3s ease;
+        }
+        #btn-copy:hover {
+            background: linear-gradient(45deg, #FF6B6B, #FF4E50);
+            box-shadow: 0 0 30px rgba(255, 78, 80, 0.8);
+            transform: scale(1.05);
         }
         #btn-copy:active {
-            background-color: #45a049;
+            background: linear-gradient(45deg, #FF4E50, #FF6B6B);
+            box-shadow: 0 0 25px rgba(255, 78, 80, 0.6);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>You need to wait 35 seconds...</h1>
+        <h1>Wait for 35 Seconds...</h1>
         <p>After this time, you will be able to copy the password.</p>
         <div id="timer"></div>
         <button id="btn-copy" onclick="copyPassword()">Copy Password</button>
